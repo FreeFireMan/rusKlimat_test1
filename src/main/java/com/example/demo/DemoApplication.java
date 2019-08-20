@@ -11,7 +11,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
 
+import java.io.File;
+
 import static java.lang.System.exit;
+import static java.lang.System.setErr;
 
 @SpringBootApplication
 public class DemoApplication implements CommandLineRunner {
@@ -37,14 +40,19 @@ public class DemoApplication implements CommandLineRunner {
         ResponseEntity<RusKlimatResponse> response = restTemplate.exchange(url,HttpMethod.GET,entity,RusKlimatResponse.class);
 
         System.out.println(response.getBody().getData());
+        File newState = new File(response.getBody().getData().toString());
+        System.out.println(response.getBody());
+        Mtp node = new Mtp();
 
-        Mtp node = mapper(response.getBody().getData());
-        System.out.println(node);
+
+
+        //Mtp node = mapper.readValues(response.getBody().toString(), Mtp.class);
+      /*  System.out.println(node);
         System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------");
 
         String jsonWriter = mapper.writerWithDefaultPrettyPrinter()
                 .writeValueAsString(node);
-        System.out.println(jsonWriter);
+        System.out.println(jsonWriter);*/
 
         exit(0);
     }
