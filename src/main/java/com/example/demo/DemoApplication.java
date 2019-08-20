@@ -2,6 +2,7 @@ package com.example.demo;
 
 import com.example.demo.model.Mtp;
 import com.example.demo.rusKlimat.api.RusKlimatResponse;
+import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.boot.Banner;
@@ -36,15 +37,15 @@ public class DemoApplication implements CommandLineRunner {
         HttpEntity<String> entity = new HttpEntity<>("paramters",headers);
         String url = "http://api.rusklimat.ru/rest/Contentplatform/mtp/a0a7de95-9a5c-4eb2-8000-7c3136e5efe7?$format=json";
         ObjectMapper mapper = new ObjectMapper();
-
+        mapper.configure(JsonParser.Feature.ALLOW_UNQUOTED_FIELD_NAMES, true);
         ResponseEntity<RusKlimatResponse> response = restTemplate.exchange(url,HttpMethod.GET,entity,RusKlimatResponse.class);
 
         Mtp node = new Mtp();
 
 
 
-        node = mapper.readValue(response.getBody().getData().toString(), Mtp.class);
-        System.out.println(node);
+        JsonNode jsonNode = mapper.readValue(response.getBody().getData().toString(), JsonNode.class);
+        System.out.println(jsonNode.toString());
         /*System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------");
 
         String jsonWriter = mapper.writerWithDefaultPrettyPrinter()
