@@ -46,7 +46,7 @@ public class DemoApplication implements CommandLineRunner {
 
 
 
-        //Mtp node = mapper.readValues(response.getBody().toString(), Mtp.class);
+        Mtp node = mapper.readValue(response.getBody().getData(), Mtp.class);
       /*  System.out.println(node);
         System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------");
 
