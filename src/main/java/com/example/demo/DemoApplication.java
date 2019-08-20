@@ -39,16 +39,13 @@ public class DemoApplication implements CommandLineRunner {
 
         ResponseEntity<RusKlimatResponse> response = restTemplate.exchange(url,HttpMethod.GET,entity,RusKlimatResponse.class);
 
-        System.out.println(response.getBody().getData());
-        File newState = new File(response.getBody().getData().toString());
-        System.out.println(response.getBody());
         Mtp node = new Mtp();
 
 
 
-        Mtp node = mapper.readValue(response.getBody().getData(), Mtp.class);
-      /*  System.out.println(node);
-        System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------");
+        node = mapper.readValue(response.getBody().getData().toString(), Mtp.class);
+        System.out.println(node);
+        /*System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------");
 
         String jsonWriter = mapper.writerWithDefaultPrettyPrinter()
                 .writeValueAsString(node);
