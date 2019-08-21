@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -10,13 +11,15 @@ import lombok.Data;
 import java.util.List;
 
 @Data
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Mtp {
 
     @JsonProperty("odata.metadata")
     private String metadata;
     @JsonProperty("Архивный")
     private Boolean arhiv;
-    private String PredefinedDataName;
+    @JsonProperty("PredefinedDataName")
+    private String predefinedDataName;
     @JsonProperty("Марка_Key")
     private String marka_key;
     @JsonProperty("КоэффициентПересчетаОбъема")
@@ -27,10 +30,12 @@ public class Mtp {
             private String osnovIzobr_Key;
     @JsonProperty("Комплектующие")
             private List<ObjectNode> komplect;
-    private boolean DeletionMark;
+    @JsonProperty("DeletionMark")
+    private boolean deletionMark;
     @JsonProperty("ИдентификаторИсточника")
-            private String indifikator;
-    private String Description;
+            private String sourseID;
+    @JsonProperty("Description")
+    private String description;
     @JsonProperty("СтранаПроисхождения_Key")
             private String stranaProizh_Key;
     @JsonProperty("КодТН_ВЭД_Key")
@@ -44,9 +49,9 @@ public class Mtp {
     @JsonProperty("РегистрацияНаСайтах")
     private List<ObjectNode> registrationOnSites;
     @JsonProperty("ИБВладелец_Key")
-    private String IBVladelec_Key;
+    private String iBVladelec_Key;
     @JsonProperty("НаименованиеОтПроизводителяАнгл")
-    private String NaimenovOtProizvoditelya;
+    private String naimenovOtProizvoditelya;
     @JsonProperty("Оригинал_Key")
     private String original_Key;
     @JsonProperty("Кратность")
@@ -56,8 +61,9 @@ public class Mtp {
     @JsonProperty("ПолноеНаименование")
     private String fullName;
     @JsonProperty("АктуальнаяНоменклатура_Key")
-    private String CarrentNomenklature_Key;
-    private boolean Predefined;
+    private String carrentNomenklature_Key;
+    @JsonProperty("Predefined")
+    private boolean predefined;
     @JsonProperty("ДополнительнаяКлассификация")
     private List<ObjectNode> dopClassification;
     @JsonProperty("ВстроенныеОпции")
@@ -104,7 +110,8 @@ public class Mtp {
     private String referencePosition_Key;
     @JsonProperty("ПределШтабелирования")
     private int limitPile;
-    private String DataVersion;
+    @JsonProperty("DataVersion")
+    private String dataVersion;
     @JsonProperty("Автор_Key")
     private String Author_Key;
     @JsonProperty("АртикулПроизводителя")
@@ -135,7 +142,8 @@ public class Mtp {
     private String dateCreate;
     @JsonProperty("Бесплатный")
     private boolean free;
-    private String Code;
+    @JsonProperty("Code")
+    private String code;
     @JsonProperty("БазоваяЕИ_Key")
     private  String baseEI_Key;
     @JsonProperty("Штрихкоды")
@@ -156,7 +164,8 @@ public class Mtp {
     private String model;
     @JsonProperty("ЕстьАналоги")
     private boolean thereAreAnalogs;
-    private String Ref_Key;
+    @JsonProperty("Ref_Key")
+    private String ref_Key;
     @JsonProperty("ТранспортнаяУпаковка@navigationLinkUrl")
     private String transportPackagingNavigationLinkUrl;
     @JsonProperty("БазаИсточник@navigationLinkUrl")
